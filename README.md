@@ -47,4 +47,64 @@ To use this project:
 
 ## Getting Started
 
-[Add your setup and usage instructions here]
+### Prerequisites
+- Python 3.8 or higher
+- Git
+
+### Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Clint07-datascientist/ML_Pipeline_Summative.git
+   cd ML_Pipeline_Summative
+   ```
+
+2. **Create and activate virtual environment**
+   
+   **Windows:**
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+   
+   **Or use the provided activation script:**
+   ```bash
+   activate_env.bat
+   ```
+   
+   **macOS/Linux:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+
+4. **Set up Jupyter kernel (optional)**
+   ```bash
+   python -m ipykernel install --user --name=agroinsightx --display-name="AgroInsightX ML Pipeline"
+   ```
+
+5. **Obtain the dataset** (contact repository owner for access)
+
+6. **Run the ML pipeline**
+   ```bash
+   jupyter notebook notebook/ml_pipeline.ipynb
+   ```
+
+### Project Structure
+```
+ML_Pipeline_Summative/
+├── data/                    # Dataset (excluded from Git)
+├── notebook/               # Jupyter notebooks
+│   └── ml_pipeline.ipynb   # Main ML pipeline
+├── models/                 # Saved models (will be created)
+├── venv/                   # Virtual environment (excluded from Git)
+├── requirements.txt        # Python dependencies
+├── activate_env.bat       # Windows activation script
+└── README.md              # This file
+```

@@ -1,11 +1,11 @@
 # Dataset images
-data/train_set/
-data/test_set/
+#data/train_set/
+#data/test_set/
 
 # Image files
-*.jpg
-*.jpeg
-*.png
+#*.jpg
+#*.jpeg
+#*.png
 *.bmp
 *.tiff
 *.gif
@@ -19,6 +19,7 @@ __pycache__/
 env/
 venv/
 .venv/
+ML_Pipeline_Summative/venv/
 
 # Jupyter Notebook
 .ipynb_checkpoints
