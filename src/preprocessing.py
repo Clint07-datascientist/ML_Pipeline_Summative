@@ -1,42 +1,32 @@
+# src/preprocessing.py
+
+import os
 import tensorflow as tf
-from tensorflow.keras import layers
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing import image_dataset_from_directory
 
-# Function to split the dataset into training, validation, and testing sets
-def splitting_dataset_tf(ds, train_split=0.7, val_split=0.15, test_split=0.15, shuffle=True, shuffle_size=10000):
-    ds_size = len(ds)
-    if shuffle:
-        ds = ds.shuffle(shuffle_size, seed=12)
-    train_size = int(train_split * ds_size)
-    val_size = int(val_split * ds_size)
-
-    train_ds = ds.take(train_size)
-    val_ds = ds.skip(train_size).take(val_size)
-    test_ds = ds.skip(train_size).skip(val_size)
-    return train_ds, val_ds, test_ds
-
-# Function to preprocess datasets with caching, shuffling, and prefetching
-def preprocess_dataset(train_ds, val_ds, test_ds, buffer_size=tf.data.AUTOTUNE):
-    train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=buffer_size)
-    val_ds = val_ds.cache().shuffle(1000).prefetch(buffer_size=buffer_size)
-    test_ds = test_ds.cache().shuffle(1000).prefetch(buffer_size=buffer_size)
-    return train_ds, val_ds, test_ds
-
-# Scaling layer for resizing and normalizing image pixels
-def scaling_layer(image_size):
-    return tf.keras.Sequential([
-        layers.Resizing(image_size, image_size),
-        layers.Rescaling(1.0 / 255)
-    ])
-
-# Data augmentation using ImageDataGenerator
-def create_data_augmentor():
-    return ImageDataGenerator(
-        rotation_range=20,
-        width_shift_range=0.2,
-        height_shift_range=0.2,
-        shear_range=0.2,
-        zoom_range=0.2,
-        horizontal_flip=True,
-        fill_mode='nearest'
+def load_datasets(data_dir, image_size=(224, 224), batch_size=32, val_split=0.2, seed=123):
+    train_ds = image_dataset_from_directory(
+        data_dir,
+        validation_split=val_split,
+        subset="training",
+        seed=seed,
+        image_size=image_size,
+        batch_size=batch_size
     )
+    
+    val_ds = image_dataset_from_directory(
+        data_dir,
+        validation_split=val_split,
+        subset="validation",
+        seed=seed,
+        image_size=image_size,
+        batch_size=batch_size
+    )
+    
+    class_names = train_ds.class_names
+
+    AUTOTUNE = tf.data.AUTOTUNE
+    train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
+    val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
+    
+    return train_ds, val_ds, class_names
