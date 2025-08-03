@@ -15,35 +15,37 @@ This project uses a comprehensive dataset with over 10,000 images for training a
 - **Leaf Spot** - Disease identification
 - **Streak Virus** - Disease identification
 
-### Data Organization
+### Project Structure
 ```
-data/
-├── train_set/
-│   ├── fall armyworm/
-│   ├── grasshoper/
-│   ├── healthy/
-│   ├── leaf beetle/
-│   ├── leaf blight/
-│   ├── leaf spot/
-│   └── streak virus/
-└── test_set/
-    ├── fall armyworm/
-    ├── grasshoper/
-    ├── healthy/
-    ├── leaf beetle/
-    ├── leaf blight/
-    ├── leaf spot/
-    └── streak virus/
+ML_Pipeline_Summative/
+│
+├── README.md # This file
+├── notebook/
+│   └── ml_pipeline.ipynb        # Full training notebook
+│
+├── src/
+│   ├── preprocessing.py                # Preprocessing logic
+│   ├── model.py                        # Model training + retraining logic
+│   └── prediction.py                   # Predict single image
+│
+├── data/
+│   ├── train/
+│   └── test/
+│
+├── models/
+│   └── maize_model.h5
+│
+├── api/
+│   ├── main.py                         # FastAPI app
+│   └── utils.py                        # Shared logic for upload/retrain
+│
+├── ui/
+│   └── app.py                          # Streamlit UI
+│
+├── Dockerfile
+└── requirements.txt                      
+
 ```
-
-## Note on Dataset
-
-⚠️ **Dataset not included in repository**: Due to the large size (10,000+ images), the actual image dataset is excluded from version control via `.gitignore`. 
-
-To use this project:
-1. Clone this repository
-2. Obtain the dataset separately (contact repository owner for access)
-3. Place images in the `data/` folder structure shown above
 
 ## Getting Started
 
@@ -95,16 +97,3 @@ To use this project:
    ```bash
    jupyter notebook notebook/ml_pipeline.ipynb
    ```
-
-### Project Structure
-```
-ML_Pipeline_Summative/
-├── data/                    # Dataset (excluded from Git)
-├── notebook/               # Jupyter notebooks
-│   └── ml_pipeline.ipynb   # Main ML pipeline
-├── models/                 # Saved models (will be created)
-├── venv/                   # Virtual environment (excluded from Git)
-├── requirements.txt        # Python dependencies
-├── activate_env.bat       # Windows activation script
-└── README.md              # This file
-```
