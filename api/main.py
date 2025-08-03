@@ -1,13 +1,15 @@
-# sapi/main.py
+# api/main.py
 
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 import shutil
 import os
-
+from typing import List
+from api.retrain import retrain_model
+from api.utils import save_bulk_files
 from src.prediction import load_model, preprocess_image, predict_image
 from src.preprocessing import load_datasets
-from src.api.retrain import retrain_model
+
 
 app = FastAPI()
 
@@ -50,3 +52,23 @@ def retrain():
         return {"message": "Model retrained and updated successfully."}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+UPLOAD_FOLDER = "data/uploads"  # Or any temp folder you want
+
+@app.post("/upload-batch/")
+async def upload_batch(files: List[UploadFile] = File(...)):
+    """
+    Upload multiple images to be used for retraining.
+    Images are saved to a temporary folder for future processing.
+    """
+    try:
+        saved_paths = save_bulk_files(files, UPLOAD_FOLDER)
+        return {
+            "message": f"{len(saved_paths)} file(s) uploaded successfully.",
+            "files": saved_paths
+        }
+    except Exception as e:
+        return {
+            "error": str(e),
+            "message": "Upload failed."
+        }
