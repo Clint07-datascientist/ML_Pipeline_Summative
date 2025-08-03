@@ -32,3 +32,17 @@ def save_model(model, path='models/maize_disease_model.h5'):
 
 def load_model(path='models/maize_disease_model.h5'):
     return tf.keras.models.load_model(path)
+
+def retrain_model(existing_model_path, new_data_dir, model_output_path):
+    from src.preprocessing import load_data
+    X_new, y_new, class_names = load_data(new_data_dir)
+
+    # Load original model and existing data
+    base_model = tf.keras.models.load_model(existing_model_path)
+    
+    # Optionally freeze some layers or use the model as-is
+    base_model.fit(X_new, y_new, epochs=5, validation_split=0.2)
+
+    base_model.save(model_output_path)
+    return model_output_path
+

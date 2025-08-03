@@ -72,3 +72,13 @@ async def upload_batch(files: List[UploadFile] = File(...)):
             "error": str(e),
             "message": "Upload failed."
         }
+
+@app.post("/retrain/")
+def retrain_model_endpoint():
+    model_path = "models/maize_model_v1.keras"
+    new_data_dir = "data/uploads"
+    new_model_path = "models/maize_model_v2.keras"
+
+    updated_model = retrain_model(model_path, new_data_dir, new_model_path)
+    return {"message": "Model retrained successfully", "new_model": updated_model}
+
