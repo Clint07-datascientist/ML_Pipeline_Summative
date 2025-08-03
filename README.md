@@ -15,35 +15,38 @@ This project uses a comprehensive dataset with over 10,000 images for training a
 - **Leaf Spot** - Disease identification
 - **Streak Virus** - Disease identification
 
-### Data Organization
+### Folder Structure
 ```
-data/
-├── train_set/
-│   ├── fall armyworm/
-│   ├── grasshoper/
-│   ├── healthy/
-│   ├── leaf beetle/
-│   ├── leaf blight/
-│   ├── leaf spot/
-│   └── streak virus/
-└── test_set/
-    ├── fall armyworm/
-    ├── grasshoper/
-    ├── healthy/
-    ├── leaf beetle/
-    ├── leaf blight/
-    ├── leaf spot/
-    └── streak virus/
+maize_leaf_disease_classifier/
+│
+├── README.md
+├── notebook/
+│   └── maize_leaf_disease.ipynb        # Full training notebook
+│
+├── src/
+│   ├── preprocessing.py                # Preprocessing logic
+│   ├── model.py                        # Model training + retraining logic
+│   └── prediction.py                   # Predict single image
+│
+├── data/
+│   ├── train/
+│   └── test/
+│
+├── models/
+│   └── maize_model.h5
+│
+├── api/
+│   ├── main.py                         # FastAPI app
+│   └── utils.py                        # Shared logic for upload/retrain
+│
+├── ui/
+│   └── app.py                          # Streamlit UI
+│
+├── Dockerfile
+├── requirements.txt
+└── locustfile.py                       # For flood testing
+
 ```
-
-## Note on Dataset
-
-⚠️ **Dataset not included in repository**: Due to the large size (10,000+ images), the actual image dataset is excluded from version control via `.gitignore`. 
-
-To use this project:
-1. Clone this repository
-2. Obtain the dataset separately (contact repository owner for access)
-3. Place images in the `data/` folder structure shown above
 
 ## Getting Started
 
