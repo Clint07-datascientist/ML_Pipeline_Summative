@@ -15,13 +15,13 @@ This project uses a comprehensive dataset with over 10,000 images for training a
 - **Leaf Spot** - Disease identification
 - **Streak Virus** - Disease identification
 
-### Folder Structure
+### Project Structure
 ```
-maize_leaf_disease_classifier/
+ML_Pipeline_Summative/
 │
-├── README.md
+├── README.md # This file
 ├── notebook/
-│   └── maize_leaf_disease.ipynb        # Full training notebook
+│   └── ml_pipeline.ipynb        # Full training notebook
 │
 ├── src/
 │   ├── preprocessing.py                # Preprocessing logic
@@ -43,8 +43,7 @@ maize_leaf_disease_classifier/
 │   └── app.py                          # Streamlit UI
 │
 ├── Dockerfile
-├── requirements.txt
-└── locustfile.py                       # For flood testing
+└── requirements.txt                      
 
 ```
 
@@ -98,16 +97,3 @@ maize_leaf_disease_classifier/
    ```bash
    jupyter notebook notebook/ml_pipeline.ipynb
    ```
-
-### Project Structure
-```
-ML_Pipeline_Summative/
-├── data/                    # Dataset (excluded from Git)
-├── notebook/               # Jupyter notebooks
-│   └── ml_pipeline.ipynb   # Main ML pipeline
-├── models/                 # Saved models (will be created)
-├── venv/                   # Virtual environment (excluded from Git)
-├── requirements.txt        # Python dependencies
-├── activate_env.bat       # Windows activation script
-└── README.md              # This file
-```
