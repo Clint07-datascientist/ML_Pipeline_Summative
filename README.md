@@ -171,6 +171,11 @@ ML_Pipeline_Summative/
 
 ![Image](https://github.com/user-attachments/assets/c43a8a42-bcb7-4d0a-9130-27ebe1863031)
 
+### Overall Model Evaluation
+- Accuracy: ~74% overall, which is reasonable for a 7-class image classification task with class imbalance and visual overlap.
+- F1-Score (macro avg): 0.75 – indicating balanced performance across classes.
+- Confusion Matrix: Shows some confusion between similar-looking classes (like leaf blight, leaf spot, healthy), but strong class-specific confidence for Leaf Beetle and Streak Virus
+
 ---
 
 ## Locust Load Testing Results
