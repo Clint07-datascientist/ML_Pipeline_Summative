@@ -13,7 +13,7 @@ A machine learning pipeline for agricultural disease and pest detection in maize
 
 # 🌐 Live API
 
-> **Base URL**: `https://maize-api.example.com`
+> **Base URL**: [Live API URL](https://ml-pipeline-summative-6fvj.onrender.com)
 
 - `POST /predict` — Predict class of a maize leaf image
 - `POST /upload` — Upload bulk images for retraining
