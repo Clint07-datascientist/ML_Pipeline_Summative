@@ -20,16 +20,29 @@ class_names = ["fall_armyworm", "grasshopper", "healthy", "leaf_beetle", "leaf_b
 def initialize_model():
     """Initialize the model if it exists"""
     global model
-    MODEL_PATH = "models/maize_disease_model.h5"
+    # Get the project root directory (parent of api directory)
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    MODEL_PATH = os.path.join(project_root, "models", "maize_model.h5")
+    
+    print(f"🔍 Looking for model at: {MODEL_PATH}")
     
     if os.path.exists(MODEL_PATH):
         try:
-            from src.prediction import load_model
-            model = load_model(MODEL_PATH)
+            # Try to load model directly with TensorFlow first
+            import tensorflow as tf
+            print("🔧 Attempting to load model with TensorFlow...")
+            model = tf.keras.models.load_model(MODEL_PATH, compile=False)
             print("✅ Model loaded successfully!")
-        except Exception as e:
-            print(f"⚠️ Error loading model: {e}")
-            model = None
+        except Exception as tf_error:
+            print(f"⚠️ TensorFlow loading failed: {tf_error}")
+            print("🔧 Trying alternative loading method...")
+            try:
+                from src.prediction import load_model
+                model = load_model(MODEL_PATH)
+                print("✅ Model loaded successfully with custom loader!")
+            except Exception as custom_error:
+                print(f"⚠️ Custom loading also failed: {custom_error}")
+                model = None
     else:
         print("⚠️ Model file not found. Please train the model first using the notebook.")
         model = None

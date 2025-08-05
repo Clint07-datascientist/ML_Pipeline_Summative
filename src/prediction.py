@@ -6,7 +6,23 @@ from tensorflow.keras.preprocessing import image
 import os
 
 def load_model(model_path='models/maize_disease_model.h5'):
-    return tf.keras.models.load_model(model_path)
+    """Load model with error handling for architecture issues"""
+    try:
+        # Try loading without compiling first
+        model = tf.keras.models.load_model(model_path, compile=False)
+        
+        # Recompile the model with fresh settings
+        model.compile(
+            optimizer='adam',
+            loss='categorical_crossentropy',
+            metrics=['accuracy']
+        )
+        return model
+        
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        # If there are architecture issues, try loading weights only
+        raise e
 
 def preprocess_image(img_path, target_size=(224, 224)):
     img = image.load_img(img_path, target_size=target_size)
