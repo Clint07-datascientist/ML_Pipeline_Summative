@@ -164,6 +164,15 @@ ML_Pipeline_Summative/
 
 ---
 
+## Model Performance Results
+
+![Image](https://github.com/user-attachments/assets/9dce6a4d-9694-4e8c-9070-1061e116fed2)
+
+
+![Image](https://github.com/user-attachments/assets/c43a8a42-bcb7-4d0a-9130-27ebe1863031)
+
+---
+
 ## Locust Load Testing Results
 
 ![Image](https://github.com/user-attachments/assets/498e797f-d25d-44dc-9e85-5f2dc3366fbc)
