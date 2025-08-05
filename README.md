@@ -6,7 +6,7 @@ A machine learning pipeline for agricultural disease and pest detection in maize
 
 ## 📽️ Demo Video
 
-👉 [Watch Demo on YouTube](https://youtube.com/your-demo-link-here)  
+👉 [Watch Demo on YouTube](https://youtu.be/MmWxmnVYOVk)  
 🎯 Shows prediction, retraining, and flood testing
 
 ---
